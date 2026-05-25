@@ -7,6 +7,7 @@ Dexter is an autonomous financial research agent that thinks, plans, and learns 
 ## Table of Contents
 
 - [👋 Overview](#-overview)
+- [🇰🇷 한국 주식 리서치](#-한국-주식-리서치)
 - [✅ Prerequisites](#-prerequisites)
 - [💻 How to Install](#-how-to-install)
 - [🚀 How to Run](#-how-to-run)
@@ -43,6 +44,103 @@ Dexter takes complex financial questions and turns them into clear, step-by-step
 [![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt) [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=social&logo=discord)](https://discord.gg/jpGHv2XB6T)
 
 <img width="1042" height="638" alt="Screenshot 2026-02-18 at 12 21 25 PM" src="https://github.com/user-attachments/assets/2a6334f9-863f-4bd2-a56f-923e42f4711e" />
+
+
+## 🇰🇷 한국 주식 리서치
+
+Dexter는 미국 주식과 한국 주식을 **하나의 에이전트에서 동시에** 다룰 수 있습니다. 사용자가 시장을 명시할 필요 없이, LLM이 티커 형태와 회사명 언어를 보고 알맞은 데이터 소스를 골라 호출합니다.
+
+### 동작 방식
+
+```mermaid
+flowchart TB
+    Q[사용자 쿼리] --> LLM{LLM 라우팅}
+
+    LLM -->|6자리 숫자 티커<br/>한국어 회사명| KR[KR 툴]
+    LLM -->|알파벳 티커<br/>영문 회사명| US[US 툴]
+    LLM -->|크로스마켓 비교| Both[양쪽 모두 호출]
+
+    KR --> DART[(DART API<br/>공시·재무)]
+    KR --> KRX[(KRX<br/>시세·공매도)]
+
+    US --> FD[(Financial Datasets<br/>재무·시세)]
+    US --> SEC[(SEC EDGAR<br/>공시)]
+
+    Both --> DART
+    Both --> FD
+
+    DART --> Out[종합 답변]
+    KRX --> Out
+    FD --> Out
+    SEC --> Out
+```
+
+### 신규 툴 (DART 기반)
+
+`OPEN_DART_KEY`가 설정되면 자동 등록됩니다.
+
+| 툴 | 대응되는 미국 개념 | 데이터 소스 |
+|---|---|---|
+| `get_financials_kr` | `get_financials` (10-K/10-Q) | DART 사업·반기·분기보고서 |
+| `get_filings_kr` | SEC EDGAR | DART 공시 검색 |
+| `get_large_holders_kr` | 13F (5% 이상 보유) | DART 대량보유상황보고서 |
+| `get_insider_trades_kr` | Form 4 (내부자 거래) | DART 임원·주요주주 보고 |
+| `get_nps_holdings` | (미국엔 없음) | 국민연금 분기 공시 |
+| `get_short_balance_kr` | Short interest | KRX 공매도 잔고 |
+| `get_foreign_ownership_kr` | (미국엔 없음) | KRX 외국인 지분율 |
+
+### 종목 코드 해결 흐름
+
+LLM이 "삼성전자" 같은 자연어 입력을 받으면, 툴 내부에서 **티커 → corp_code** 변환을 거쳐 DART API를 호출합니다.
+
+```mermaid
+sequenceDiagram
+    participant U as 사용자
+    participant L as LLM
+    participant T as get_financials_kr
+    participant R as TickerRegistry<br/>(캐시)
+    participant D as DART API
+
+    U->>L: "삼성전자 재무 어때?"
+    L->>L: 한국 종목 인식<br/>→ 005930으로 정규화
+    L->>T: get_financials_kr({ticker: "005930"})
+    T->>R: resolve("005930")
+    R-->>T: corp_code: "00126380"
+    T->>D: 사업보고서 조회 (corp_code)
+    D-->>T: 재무 데이터
+    T-->>L: 정형화된 결과
+    L-->>U: 분석 답변 작성
+```
+
+`TickerRegistry`는 DART의 마스터 파일(`corpCode.xml`)을 **첫 실행 시 한 번 다운로드**해 `.dexter/cache/`에 저장하고, 7일마다 백그라운드에서 갱신합니다. 신규 상장·사명 변경·물적분할이 자동 반영됩니다.
+
+### 설정
+
+`.env`에 다음 항목 추가:
+
+```bash
+# 한국 주식 (필수)
+OPEN_DART_KEY=your-dart-api-key
+```
+
+DART API 키는 [opendart.fss.or.kr](https://opendart.fss.or.kr/uss/umt/cmm/EgovMberInsertView.do)에서 무료 발급. 일 10,000건 호출 한도.
+
+### 한국 시장 고유 처리
+
+- **K-IFRS 재무제표** — 연결/별도 둘 다 조회. 영업이익 정의가 미국 GAAP와 미묘하게 다름
+- **단위** — 원(KRW), 백만원/억/조 단위로 자동 포맷팅
+- **거래시간** — 09:00–15:30 KST 기준
+- **상하한가** — ±30% 일간 변동 제한 고려
+- **재벌 그룹 구조** — 삼성·현대차·SK·LG 등 그룹 내 지분 관계 분석 가능
+- **물적분할 이력** — LG화학→LG에너지솔루션 같은 분할 이벤트 추적
+
+### 크로스마켓 쿼리 예시
+
+```
+> TSMC와 삼성전자 파운드리 사업 비교해줘
+```
+
+LLM이 `get_financials` (TSMC, US) + `get_financials_kr` (삼성전자, KR)를 모두 호출하고, 단위·회계기준 차이를 보정해서 비교 표를 생성합니다.
 
 
 ## ✅ Prerequisites
