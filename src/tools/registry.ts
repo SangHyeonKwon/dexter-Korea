@@ -12,6 +12,9 @@ import { writeFileTool, WRITE_FILE_DESCRIPTION } from './filesystem/write-file.j
 import { editFileTool, EDIT_FILE_DESCRIPTION } from './filesystem/edit-file.js';
 import { GET_FINANCIALS_DESCRIPTION } from './finance/get-financials.js';
 import { createGetFinancialsKr, GET_FINANCIALS_KR_DESCRIPTION } from './finance-kr/get-financials-kr.js';
+import { getFilingsKr, GET_FILINGS_KR_DESCRIPTION } from './finance-kr/get-filings-kr.js';
+import { getLargeHoldersKr, GET_LARGE_HOLDERS_KR_DESCRIPTION } from './finance-kr/get-large-holders-kr.js';
+import { getInsiderTradesKr, GET_INSIDER_TRADES_KR_DESCRIPTION } from './finance-kr/get-insider-trades-kr.js';
 import { GET_MARKET_DATA_DESCRIPTION } from './finance/get-market-data.js';
 import { READ_FILINGS_DESCRIPTION } from './finance/read-filings.js';
 import { SCREEN_STOCKS_DESCRIPTION } from './finance/screen-stocks.js';
@@ -185,6 +188,27 @@ export function getToolRegistry(model: string): RegisteredTool[] {
       tool: createGetFinancialsKr(model),
       description: GET_FINANCIALS_KR_DESCRIPTION,
       compactDescription: 'Korean stocks (6-digit tickers like 005930). DART 사업·반기·분기보고서 (K-IFRS).',
+      concurrencySafe: true,
+    });
+    tools.push({
+      name: 'get_filings_kr',
+      tool: getFilingsKr,
+      description: GET_FILINGS_KR_DESCRIPTION,
+      compactDescription: 'Korean stock DART 공시 (filings) metadata for 6-digit tickers. Disclosure history and report search.',
+      concurrencySafe: true,
+    });
+    tools.push({
+      name: 'get_large_holders_kr',
+      tool: getLargeHoldersKr,
+      description: GET_LARGE_HOLDERS_KR_DESCRIPTION,
+      compactDescription: 'Korean 5%룰 대량보유 major shareholders for 6-digit tickers (13F-equivalent).',
+      concurrencySafe: true,
+    });
+    tools.push({
+      name: 'get_insider_trades_kr',
+      tool: getInsiderTradesKr,
+      description: GET_INSIDER_TRADES_KR_DESCRIPTION,
+      compactDescription: 'Korean 임원·주요주주 소유보고 (insider/executive ownership) for 6-digit tickers.',
       concurrencySafe: true,
     });
   }
