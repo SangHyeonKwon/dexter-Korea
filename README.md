@@ -5,6 +5,8 @@ Dexter는 작업하면서 스스로 사고하고, 계획하고, 학습하는 자
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt) [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=social&logo=discord)](https://discord.gg/jpGHv2XB6T)
 
+<img width="665" height="452" alt="Dexter 아키텍처" src="https://github.com/user-attachments/assets/02418111-5f48-4a66-be5d-dc9bf9806284" />
+
 ## 목차
 
 - [👋 개요](#-개요)
@@ -27,11 +29,9 @@ Dexter는 복잡한 금융 질문을 받아 명확한 단계별 리서치 계획
 - **미국·한국 동시 지원**: 하나의 에이전트에서 US/KR 종목을 함께 다루고 교차 비교
 - **안전장치**: 무한 루프 감지와 단계 제한을 내장해 폭주 실행 방지
 
-<img width="1042" height="638" alt="Dexter TUI" src="https://github.com/user-attachments/assets/2a6334f9-863f-4bd2-a56f-923e42f4711e" />
-
 ### 아키텍처
 
-<img width="665" height="452" alt="Dexter 아키텍처" src="https://github.com/user-attachments/assets/02418111-5f48-4a66-be5d-dc9bf9806284" />
+<img width="1042" height="638" alt="Dexter TUI" src="https://github.com/user-attachments/assets/2a6334f9-863f-4bd2-a56f-923e42f4711e" />
 
 ## 🇰🇷 한국 주식 리서치
 
