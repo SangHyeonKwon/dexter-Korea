@@ -1,6 +1,7 @@
 # Dexter 🤖
 
-Dexter는 작업하면서 스스로 사고하고, 계획하고, 학습하는 자율형 금융 리서치 에이전트입니다. 작업 계획(task planning), 자기 점검(self-reflection), 실시간 시장 데이터를 활용해 분석을 수행합니다. Claude Code를 떠올리되, 금융 리서치에 특화되도록 만들어진 도구라고 생각하면 됩니다.
+Dexter는 작업하면서 스스로 사고하고, 계획하고, 학습하는 자율형 금융 리서치 에이전트입니다. 
+작업 계획(task planning), 자기 점검(self-reflection), 실시간 시장 데이터를 활용해 분석을 수행합니다. Claude Code를 떠올리되, 금융 리서치에 특화되도록 만들어진 도구라고 생각하면 됩니다.
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt) [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=social&logo=discord)](https://discord.gg/jpGHv2XB6T)
 
@@ -312,29 +313,6 @@ Dexter는 디버깅과 이력 추적을 위해 모든 툴 호출을 스크래치
 ```
 
 덕분에 에이전트가 정확히 어떤 데이터를 수집했고 결과를 어떻게 해석했는지 손쉽게 확인할 수 있습니다.
-
-## 📱 WhatsApp으로 사용하기
-
-휴대폰을 게이트웨이에 연결해 WhatsApp으로 Dexter와 대화할 수 있습니다. 자기 자신에게 보낸 메시지가 Dexter에 의해 처리되고 응답이 같은 채팅으로 돌아옵니다.
-
-```bash
-bun run gateway:login   # WhatsApp 계정 연결 (QR 코드 스캔)
-bun run gateway         # 게이트웨이 시작
-```
-
-그런 다음 WhatsApp을 열고 본인과의 채팅(자기 자신에게 메시지)으로 이동해 Dexter에게 질문하세요.
-
-자세한 설정 방법, 구성 옵션, 문제 해결은 [WhatsApp 게이트웨이 README](src/gateway/channels/whatsapp/README.md)를 참고하세요.
-
-## 🤝 기여 방법
-
-1. 저장소 포크
-2. 기능 브랜치 생성
-3. 변경 사항 커밋
-4. 브랜치에 푸시
-5. Pull Request 생성
-
-**중요**: PR은 작고 집중되게 유지해 주세요. 리뷰와 머지가 더 쉬워집니다.
 
 ## 📄 라이선스
 
