@@ -1,49 +1,49 @@
 # Dexter 🤖
 
-Dexter is an autonomous financial research agent that thinks, plans, and learns as it works. It performs analysis using task planning, self-reflection, and real-time market data. Think Claude Code, but built specifically for financial research.
+Dexter는 작업하면서 스스로 사고하고, 계획하고, 학습하는 자율형 금융 리서치 에이전트입니다. 작업 계획(task planning), 자기 점검(self-reflection), 실시간 시장 데이터를 활용해 분석을 수행합니다. Claude Code를 떠올리되, 금융 리서치에 특화되도록 만들어진 도구라고 생각하면 됩니다.
 
-<img width="665" height="452" alt="Screenshot 2026-04-02 at 4 16 57 PM" src="https://github.com/user-attachments/assets/02418111-5f48-4a66-be5d-dc9bf9806284" />
+<img width="665" height="452" alt="Screenshot 2026-04-02 at 4 16 57 PM" src="https://github.com/user-attachments/assets/02418111-5f48-4a66-be5d-dc9bf9806284" />
 
-## Table of Contents
+## 목차
 
-- [👋 Overview](#-overview)
+- [👋 개요](#-개요)
 - [🇰🇷 한국 주식 리서치](#-한국-주식-리서치)
-- [✅ Prerequisites](#-prerequisites)
-- [💻 How to Install](#-how-to-install)
-- [🚀 How to Run](#-how-to-run)
-- [📊 How to Evaluate](#-how-to-evaluate)
-- [🐛 How to Debug](#-how-to-debug)
-- [📱 How to Use with WhatsApp](#-how-to-use-with-whatsapp)
-- [🤝 How to Contribute](#-how-to-contribute)
-- [📄 License](#-license)
+- [✅ 사전 준비](#-사전-준비)
+- [💻 설치 방법](#-설치-방법)
+- [🚀 실행 방법](#-실행-방법)
+- [📊 평가 방법](#-평가-방법)
+- [🐛 디버깅 방법](#-디버깅-방법)
+- [📱 WhatsApp으로 사용하기](#-whatsapp으로-사용하기)
+- [🤝 기여 방법](#-기여-방법)
+- [📄 라이선스](#-라이선스)
 
-## ⚠️ Disclaimer
+## ⚠️ 면책 조항
 
-This project is for **educational, entertainment, and informational purposes only**. It is not intended for real trading or investment.
+이 프로젝트는 **교육·오락·정보 제공 목적으로만** 제공됩니다. 실제 거래나 투자를 위한 것이 아닙니다.
 
-- Not financial, investment, tax, or legal advice
-- No guarantees of accuracy, completeness, or fitness for any purpose
-- Outputs may be incorrect, incomplete, or out of date
-- Creator and contributors assume no liability for any financial losses or damages
-- Consult a licensed financial advisor before making investment decisions
-- Past performance does not indicate future results
+- 금융·투자·세무·법률 자문이 아닙니다
+- 정확성·완전성·특정 목적 적합성을 보장하지 않습니다
+- 출력 결과가 부정확하거나 불완전하거나 시점이 지난 것일 수 있습니다
+- 제작자와 기여자는 어떠한 금전적 손실이나 손해에 대해서도 책임지지 않습니다
+- 투자 결정을 내리기 전에 면허를 보유한 금융 전문가와 상담하세요
+- 과거 성과가 미래 수익을 보장하지 않습니다
 
-By using this software, you agree to use it solely for learning and informational purposes and accept all risks associated with its use.
+이 소프트웨어를 사용함으로써, 귀하는 학습 및 정보 제공 목적으로만 사용할 것에 동의하며 사용에 따른 모든 위험을 감수합니다.
 
-## 👋 Overview
+## 👋 개요
 
-Dexter takes complex financial questions and turns them into clear, step-by-step research plans. It runs those tasks using live market data, checks its own work, and refines the results until it has a confident, data-backed answer.  
+Dexter는 복잡한 금융 질문을 받아 명확한 단계별 리서치 계획으로 바꿉니다. 그 작업을 실시간 시장 데이터로 실행하고, 자신의 작업을 점검하며, 데이터로 뒷받침되는 확신 있는 답에 이를 때까지 결과를 다듬습니다.
 
-**Key Capabilities:**
-- **Intelligent Task Planning**: Automatically decomposes complex queries into structured research steps
-- **Autonomous Execution**: Selects and executes the right tools to gather financial data
-- **Self-Validation**: Checks its own work and iterates until tasks are complete
-- **Real-Time Financial Data**: Access to income statements, balance sheets, and cash flow statements
-- **Safety Features**: Built-in loop detection and step limits to prevent runaway execution
+**핵심 역량:**
+- **지능형 작업 계획**: 복잡한 쿼리를 구조화된 리서치 단계로 자동 분해
+- **자율 실행**: 금융 데이터를 수집할 알맞은 툴을 선택해 실행
+- **자기 검증**: 자신의 작업을 점검하고 작업이 완료될 때까지 반복
+- **실시간 금융 데이터**: 손익계산서·재무상태표·현금흐름표 접근
+- **안전장치**: 무한 루프 감지와 단계 제한을 내장해 폭주 실행 방지
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt) [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=social&logo=discord)](https://discord.gg/jpGHv2XB6T)
 
-<img width="1042" height="638" alt="Screenshot 2026-02-18 at 12 21 25 PM" src="https://github.com/user-attachments/assets/2a6334f9-863f-4bd2-a56f-923e42f4711e" />
+<img width="1042" height="638" alt="Screenshot 2026-02-18 at 12 21 25 PM" src="https://github.com/user-attachments/assets/2a6334f9-863f-4bd2-a56f-923e42f4711e" />
 
 
 ## 🇰🇷 한국 주식 리서치
@@ -151,16 +151,16 @@ DART API 키는 [opendart.fss.or.kr](https://opendart.fss.or.kr/uss/umt/cmm/Egov
 LLM이 `get_financials` (TSMC, US) + `get_financials_kr` (삼성전자, KR)를 모두 호출하고, 단위·회계기준 차이를 보정해서 비교 표를 생성합니다.
 
 
-## ✅ Prerequisites
+## ✅ 사전 준비
 
-- [Bun](https://bun.com) runtime (v1.0 or higher)
-- OpenAI API key (get [here](https://platform.openai.com/api-keys))
-- Financial Datasets API key (get [here](https://financialdatasets.ai))
-- Exa API key (get [here](https://exa.ai)) - optional, for web search
+- [Bun](https://bun.com) 런타임 (v1.0 이상)
+- OpenAI API 키 ([여기서](https://platform.openai.com/api-keys) 발급)
+- Financial Datasets API 키 ([여기서](https://financialdatasets.ai) 발급)
+- Exa API 키 ([여기서](https://exa.ai) 발급) — 선택, 웹 검색용
 
-#### Installing Bun
+#### Bun 설치
 
-If you don't have Bun installed, you can install it using curl:
+Bun이 설치돼 있지 않다면 curl로 설치할 수 있습니다:
 
 **macOS/Linux:**
 ```bash
@@ -172,80 +172,80 @@ curl -fsSL https://bun.com/install | bash
 powershell -c "irm bun.sh/install.ps1|iex"
 ```
 
-After installation, restart your terminal and verify Bun is installed:
+설치 후 터미널을 재시작하고 Bun이 설치됐는지 확인하세요:
 ```bash
 bun --version
 ```
 
-## 💻 How to Install
+## 💻 설치 방법
 
-1. Clone the repository:
+1. 저장소 클론:
 ```bash
 git clone https://github.com/virattt/dexter.git
 cd dexter
 ```
 
-2. Install dependencies with Bun:
+2. Bun으로 의존성 설치:
 ```bash
 bun install
 ```
 
-3. Set up your environment variables:
+3. 환경 변수 설정:
 ```bash
-# Copy the example environment file
+# 예제 환경 파일 복사
 cp env.example .env
 
-# Edit .env and add your API keys (if using cloud providers)
+# .env를 편집해 API 키 추가 (클라우드 제공자를 쓰는 경우)
 # OPENAI_API_KEY=your-openai-api-key
-# ANTHROPIC_API_KEY=your-anthropic-api-key (optional)
-# GOOGLE_API_KEY=your-google-api-key (optional)
-# XAI_API_KEY=your-xai-api-key (optional)
-# OPENROUTER_API_KEY=your-openrouter-api-key (optional)
+# ANTHROPIC_API_KEY=your-anthropic-api-key (선택)
+# GOOGLE_API_KEY=your-google-api-key (선택)
+# XAI_API_KEY=your-xai-api-key (선택)
+# OPENROUTER_API_KEY=your-openrouter-api-key (선택)
 
-# Institutional-grade market data for agents
+# 에이전트용 기관급 시장 데이터
 # FINANCIAL_DATASETS_API_KEY=your-financial-datasets-api-key
 
-# (Optional) If using Ollama locally
+# (선택) 로컬에서 Ollama를 쓰는 경우
 # OLLAMA_BASE_URL=http://127.0.0.1:11434
 
-# Web Search (Exa preferred, Tavily fallback)
+# 웹 검색 (Exa 우선, Tavily 폴백)
 # EXASEARCH_API_KEY=your-exa-api-key
 # TAVILY_API_KEY=your-tavily-api-key
 ```
 
-## 🚀 How to Run
+## 🚀 실행 방법
 
-Run Dexter in interactive mode:
+대화형 모드로 Dexter 실행:
 ```bash
 bun start
 ```
 
-Or with watch mode for development:
+개발용 watch 모드로 실행:
 ```bash
 bun dev
 ```
 
-## 📊 How to Evaluate
+## 📊 평가 방법
 
-Dexter includes an evaluation suite that tests the agent against a dataset of financial questions. Evals use LangSmith for tracking and an LLM-as-judge approach for scoring correctness.
+Dexter에는 금융 질문 데이터셋으로 에이전트를 테스트하는 평가(eval) 스위트가 포함돼 있습니다. 평가는 추적에 LangSmith를, 정답 채점에 LLM-as-judge 방식을 사용합니다.
 
-**Run on all questions:**
+**전체 질문에 대해 실행:**
 ```bash
 bun run src/evals/run.ts
 ```
 
-**Run on a random sample of data:**
+**데이터의 무작위 샘플에 대해 실행:**
 ```bash
 bun run src/evals/run.ts --sample 10
 ```
 
-The eval runner displays a real-time UI showing progress, current question, and running accuracy statistics. Results are logged to LangSmith for analysis.
+평가 러너는 진행 상황, 현재 질문, 실시간 정확도 통계를 보여주는 UI를 실시간으로 표시합니다. 결과는 분석을 위해 LangSmith에 기록됩니다.
 
-## 🐛 How to Debug
+## 🐛 디버깅 방법
 
-Dexter logs all tool calls to a scratchpad file for debugging and history tracking. Each query creates a new JSONL file in `.dexter/scratchpad/`.
+Dexter는 디버깅과 이력 추적을 위해 모든 툴 호출을 스크래치패드(scratchpad) 파일에 기록합니다. 각 쿼리는 `.dexter/scratchpad/`에 새 JSONL 파일을 생성합니다.
 
-**Scratchpad location:**
+**스크래치패드 위치:**
 ```
 .dexter/scratchpad/
 ├── 2026-01-30-111400_9a8f10723f79.jsonl
@@ -253,46 +253,46 @@ Dexter logs all tool calls to a scratchpad file for debugging and history tracki
 └── ...
 ```
 
-Each file contains newline-delimited JSON entries tracking:
-- **init**: The original query
-- **tool_result**: Each tool call with arguments, raw result, and LLM summary
-- **thinking**: Agent reasoning steps
+각 파일은 다음을 추적하는 줄바꿈 구분(JSONL) 항목을 담습니다:
+- **init**: 원본 쿼리
+- **tool_result**: 인자·원시 결과·LLM 요약을 포함한 각 툴 호출
+- **thinking**: 에이전트의 추론 단계
 
-**Example scratchpad entry:**
+**스크래치패드 항목 예시:**
 ```json
 {"type":"tool_result","timestamp":"2026-01-30T11:14:05.123Z","toolName":"get_income_statements","args":{"ticker":"AAPL","period":"annual","limit":5},"result":{...},"llmSummary":"Retrieved 5 years of Apple annual income statements showing revenue growth from $274B to $394B"}
 ```
 
-This makes it easy to inspect exactly what data the agent gathered and how it interpreted results.
+덕분에 에이전트가 정확히 어떤 데이터를 수집했고 결과를 어떻게 해석했는지 손쉽게 확인할 수 있습니다.
 
-## 📱 How to Use with WhatsApp
+## 📱 WhatsApp으로 사용하기
 
-Chat with Dexter through WhatsApp by linking your phone to the gateway. Messages you send to yourself are processed by Dexter and responses are sent back to the same chat.
+휴대폰을 게이트웨이에 연결해 WhatsApp으로 Dexter와 대화할 수 있습니다. 자기 자신에게 보낸 메시지가 Dexter에 의해 처리되고 응답이 같은 채팅으로 돌아옵니다.
 
-**Quick start:**
+**빠른 시작:**
 ```bash
-# Link your WhatsApp account (scan QR code)
+# WhatsApp 계정 연결 (QR 코드 스캔)
 bun run gateway:login
 
-# Start the gateway
+# 게이트웨이 시작
 bun run gateway
 ```
 
-Then open WhatsApp, go to your own chat (message yourself), and ask Dexter a question.
+그런 다음 WhatsApp을 열고 본인과의 채팅(자기 자신에게 메시지)으로 이동해 Dexter에게 질문하세요.
 
-For detailed setup instructions, configuration options, and troubleshooting, see the [WhatsApp Gateway README](src/gateway/channels/whatsapp/README.md).
+자세한 설정 방법, 구성 옵션, 문제 해결은 [WhatsApp 게이트웨이 README](src/gateway/channels/whatsapp/README.md)를 참고하세요.
 
-## 🤝 How to Contribute
+## 🤝 기여 방법
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+1. 저장소 포크
+2. 기능 브랜치 생성
+3. 변경 사항 커밋
+4. 브랜치에 푸시
+5. Pull Request 생성
 
-**Important**: Please keep your pull requests small and focused.  This will make it easier to review and merge.
+**중요**: PR은 작고 집중되게 유지해 주세요. 리뷰와 머지가 더 쉬워집니다.
 
 
-## 📄 License
+## 📄 라이선스
 
-This project is licensed under the MIT License.
+이 프로젝트는 MIT 라이선스로 배포됩니다.
