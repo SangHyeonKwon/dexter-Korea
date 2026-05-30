@@ -1,6 +1,6 @@
 import { DynamicStructuredTool } from '@langchain/core/tools';
 import { z } from 'zod';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync, readdirSync, statSync, unlinkSync } from 'fs';
 import { dartApi } from '../api.js';
 import { resolveTicker } from '../../../data/ticker-registry.js';
 import { dexterPath } from '../../../utils/paths.js';
@@ -52,6 +52,39 @@ function defaultYear(): number {
   // DART typically publishes annual reports in March of the following year.
   // Default to last year so requests don't 404 in January–March.
   return new Date().getUTCFullYear() - 1;
+}
+
+export const RAW_FILE_KEEP = 30;
+
+/**
+ * Keep .dexter/tool-results bounded: drop all but the most recent N raw dumps.
+ * Scoped to our own kr-financials-*.json files (never the agent's call_*.txt
+ * persists), never deletes the file just written (keepName), and tolerates files
+ * vanishing under concurrent calls.
+ */
+export function pruneRawFinancialFiles(dir: string, keepName: string): void {
+  try {
+    const entries = readdirSync(dir)
+      .filter((f) => f.startsWith('kr-financials-') && f.endsWith('.json') && f !== keepName)
+      .map((f) => {
+        try {
+          return { f, mtime: statSync(`${dir}/${f}`).mtimeMs };
+        } catch {
+          return null; // vanished between readdir and stat
+        }
+      })
+      .filter((e): e is { f: string; mtime: number } => e !== null)
+      .sort((a, b) => b.mtime - a.mtime);
+    for (const { f } of entries.slice(RAW_FILE_KEEP)) {
+      try {
+        unlinkSync(`${dir}/${f}`);
+      } catch {
+        // already removed by a concurrent call
+      }
+    }
+  } catch {
+    // best-effort cleanup
+  }
 }
 
 export const getBusinessReport = new DynamicStructuredTool({
@@ -119,7 +152,11 @@ export const getBusinessReport = new DynamicStructuredTool({
         const dir = dexterPath('tool-results');
         if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
         const years = successful.map((r) => r.year);
-        rawLineItemsFile = `${dir}/kr-financials-${resolved.corp_code}-${reprt_code}-${input.fs_div}-${Math.min(...years)}_${Math.max(...years)}.json`;
+        // corp_code is the only externally-sourced path component — sanitize it so a
+        // malformed registry value can't write outside the results dir.
+        const safeCorp = resolved.corp_code.replace(/[^a-zA-Z0-9_-]/g, '_');
+        const fileName = `kr-financials-${safeCorp}-${reprt_code}-${input.fs_div}-${Math.min(...years)}_${Math.max(...years)}.json`;
+        rawLineItemsFile = `${dir}/${fileName}`;
         writeFileSync(
           rawLineItemsFile,
           JSON.stringify(
@@ -136,6 +173,7 @@ export const getBusinessReport = new DynamicStructuredTool({
           ),
           'utf-8',
         );
+        pruneRawFinancialFiles(dir, fileName);
       } catch {
         rawLineItemsFile = undefined; // best-effort; the summary is the source of truth
       }

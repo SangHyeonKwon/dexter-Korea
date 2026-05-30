@@ -23,7 +23,7 @@ const agent = await Agent.create({
   model: process.env.KR_RUNNER_MODEL ?? 'gpt-5.5',
   channel: 'cli',
   memoryEnabled: false,
-  maxIterations: 12,
+  maxIterations: 10,
 });
 
 console.log('QUERY:', query);

@@ -315,7 +315,8 @@ export function summarizePeriod(list: DartRow[], opts: SummarizeOpts): Financial
 
   // ROE mixes a flow (net income) with a stock (equity); only meaningful over a full
   // year. Quarterly/semiannual net income is YTD-cumulative, so skip to avoid a
-  // misleadingly low partial-year ROE.
+  // misleadingly low partial-year ROE. Basis: total net income / total equity (both
+  // incl. non-controlling interests for CFS).
   const roePct = opts.report_type === 'annual' ? ratioPct(netIncome.current, totalEquity.current) : null;
 
   return {

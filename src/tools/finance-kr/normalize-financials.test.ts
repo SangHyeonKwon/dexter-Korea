@@ -111,6 +111,15 @@ describe('summarizePeriod', () => {
     expect(q.ratios.roePct).toBeNull();
     expect(q.ratios.operatingMarginPct).toBe(10.9); // ratios of two YTD flows stay valid
   });
+  it('nulls YoY when the prior period is absent (quarterly frmtrm undefined)', () => {
+    const q1: DartRow[] = [
+      { sj_div: 'IS', account_id: 'ifrs-full_Revenue', account_nm: '매출액', thstrm_amount: '133,873,444,000,000' },
+    ];
+    const s2 = summarizePeriod(q1, { bsns_year: 2026, report_type: 'quarterly_1', fs_div: 'CFS' });
+    expect(s2.incomeStatement.revenue.current).toBe(133873444000000);
+    expect(s2.incomeStatement.revenue.prior).toBeNull();
+    expect(s2.ratios.revenueYoYPct).toBeNull();
+  });
   it('returns null metrics (not throw) when accounts are missing', () => {
     const empty = summarizePeriod([], { bsns_year: 2025, report_type: 'annual', fs_div: 'CFS' });
     expect(empty.incomeStatement.revenue.current).toBeNull();

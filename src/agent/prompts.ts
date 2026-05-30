@@ -1,4 +1,5 @@
 import { buildCompactToolDescriptions } from '../tools/registry.js';
+import { checkApiKeyExists } from '../utils/env.js';
 import { buildSkillMetadataSection, discoverSkills } from '../skills/index.js';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -92,8 +93,7 @@ ${skillList}
  * defaults to a generic per-metric summary indistinguishable from a chatbot.
  */
 function buildKoreanResearchSection(): string {
-  const dartKey = process.env.DART_API_KEY;
-  if (!dartKey || dartKey.trim().startsWith('your-')) {
+  if (!checkApiKeyExists('DART_API_KEY')) {
     return '';
   }
 
